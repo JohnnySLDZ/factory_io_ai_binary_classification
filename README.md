@@ -15,33 +15,34 @@ This project is the implementation of a Convolutional Neural Network (CNN) to au
 
 <[Video](https://www.youtube.com/watch?v=g0u7S8w8YA4)>
 
-## This project consist of three parts each one have their python and FactoryIO files and a folder with the Tia Portal project:
+## This project consists of three parts, each with its own Python and FactoryIO files, along with a folder containing the TIA Portal project:
 
 ### Project
-This is the main part of the project consist of:
-- `project.py`: Python file that waits for tia portal signal, captures an image of the boxes on screen, procceses the image, extract each box along with their coordinates, loads the pretrained model to make predictions for each fox and then send the information back to tia portal.
-- `project.factoryio`: Factory Io scene of the entire production line with the Pick & Place xyz system
-- `project_tia_portal` : Ladder logic for the plc s7-1500 that controls the entire system
+This is central part of project, is organized into three core components:
+- `project.py`: This Python script waits for a signal from TIA Portal, captures an image of boxes on the conveyor, processes the image to extract individual boxes with their coordinates, uses a pre-trained CNN model to classify each box, and finally sends the prediction results and coordinates back to TIA Portal.
+- `project.factoryio`: FactoryIO Scene with the Complete Production Line with XYZ Pick & Place System.
+- `project_tia_portal` : Ladder logic for the plc s7-1500 that controls the entire system.
 
 ### Define Area
-This part stablishes the width and hight of a single box in pixels to facilitate box detection, consist of:
-- `define_area.py`: Python file that waits for tia portal signal, captures an image of a single box, extract its width and height and store them in a csv file to use in the others part of the project
-- `define_area.factoryio`: Factory Io scene made to allow a single box into the capture area
-- `define_area_tia_portal`: Ladder logic for the plc s7-1500 that controls the entire system
+This section defines the width and height of a single box in pixels to facilitate box detection. It consists of:
+- `define_area.py`: This Python script waits for a signal from TIA Portal, captures an image of a single box, extracts its width and height in pixels, and stores these measurements in a CSV file for use in other parts of the project.
+- `define_area.factoryio`: Factory Io scene made to allow a single box along the productio line.
+- `define_area_tia_portal`: Ladder logic for the plc s7-1500 that controls the entire system for a single box.
 
 ### Create Dataset
-This part creates a dataset of marked and unmarked boxes in equal quantity to ensure the proper train of the CNN, consist of:
-- `create_dataset.py`: Python file that waits for tia portal signal, captures an image of the boxes on screen, procceses the image, creates an image of each one of the box and store them in a specific folder
-- `creat_dataset.factoryio`: Factory Io scene made to allow the python file to capture an image of 6 boxes at a time
-- `create_dataset_tia_portal`: Ladder logic for the plc s7-1500 that controls the entire system
-it is necesary to run this process two times turning upside down the box emitter in the factory io scene and changing the name of the outfolder in the python file to have a complete dataset of marked and unmarked boxes
+This section creates a balanced dataset of marked and unmarked boxes in equal quantities to ensure proper training of the CNN. It consists of:
+- `create_dataset.py`: This Python script waits for a trigger signal from TIA Portal, captures an image of the boxes on the conveyor, processes the image to isolate each individual box, saves cropped images of every box in a designated folder.
+- `creat_dataset.factoryio`: The FactoryIO scene is specifically designed to position six boxes simultaneously within the camera's capture area.
+- `create_dataset_tia_portal`: Ladder logic for the plc s7-1500 that controls the entire system.
+
+To create the dataset of marked and unmarked boxes, this process must be executed twice: first in the default configuration, then again turning the box emitter upside down in the FactoryIO scene and changing the name of the outfolder in the python file to distinguish between the two sets of captured box images. 
 
 ## Other Files
 ### functions.py
-This python file contains the definitions of the used to write and read values from the opcua server along with the implementation of a personalised round function
+This Python file contains the essential OPC UA client operations, including functions for writing and reading values from the server. It also implements a personalized round function.
 
 ### settings.py
-this project depends very highly on the screen size of the device to set the regions of the screen capture and to transform the coordinates of each box in pixel to the real coordinates of the Pick & Place XYZ Component in FactoryIO, therefore, this file contains these settings for a 1680x1050 screen and a 1920x1080 one, for Pick & Place the setting are the a and b coficient of a linear regretion made using a gruoup of dots in the captured image as X and the coordigates of the Pick & Place for those dots as y.
+This project highly depends on the screen size of the device, to set the regions of the screen capture and to transform the coordinates of each box in pixels to the real coordinates of the Pick & Place XYZ component in FactoryIO. Therefore, this file contains these settings for a 1680×1050 screen and a 1920×1080 one. For the Pick & Place, the settings are the a and b coefficients of a linear regression made using a group of dots in the captured image as X and the coordinates of the Pick & Place for those dots as y.
 
 ### Libraries
 
