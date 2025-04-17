@@ -1,4 +1,4 @@
-# factory_io_ai_binary_classification
+# Industrial AI with Python: CNN in FactoryIO + TIA Portal | OPC-UA Communication
 
 ## Implementation of a binary classification model for a production line using FactoryIO, Tia Portal and Python
 
