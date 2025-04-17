@@ -55,3 +55,7 @@ this project depends very highly on the screen size of the device to set the reg
 | `os`                  | Operating system interactions                                              |
 | `pandas` (`pd`)       | Data manipulation and analysis                                             |
 | `tensorflow` (`tf`)   | Machine learning model development (CNN training/inference)                |
+
+### Reference videos
+- [Tia Portal and Python Comunication](https://youtu.be/BqaXtVe9z3s?si=EPxnBUihLmdpv2xy)
+- [Tia Portal and FactoryIO Comunication](https://youtu.be/o4VLUmY8a9E?si=NMv2TfIltdsByXfI)
