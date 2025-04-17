@@ -119,13 +119,20 @@ def predict_coor(client):
                                 
                                 # Wait for robot to complete movement or user interrupt
                                 while True:
+                                    first_img = pyautogui.size().width - 250 - 40
+                                    second_img = first_img - 250 - 10
+
                                     movement = read_input_value(client, 'ns=3;s="CONFIG_VARS"."MOVE_2_BOX"')
-                                    cv2.namedWindow("image", cv2.WINDOW_NORMAL)
-                                    cv2.resizeWindow("image", 300, 300)
-                                    cv2.imshow("image", screenshot_copy)
-                                    cv2.namedWindow("image_raw", cv2.WINDOW_NORMAL)
-                                    cv2.resizeWindow("image_raw", 300, 300)
-                                    cv2.imshow("image_raw", mask)
+                                    
+                                    cv2.namedWindow("raw_image", cv2.WINDOW_NORMAL)
+                                    cv2.resizeWindow("raw_image", 250, 250)
+                                    cv2.moveWindow("raw_image", first_img, 10)
+                                    cv2.imshow("raw_image", mask)
+
+                                    cv2.namedWindow("box_detection", cv2.WINDOW_NORMAL)
+                                    cv2.resizeWindow("box_detection", 250, 250)
+                                    cv2.moveWindow("box_detection", second_img, 10)
+                                    cv2.imshow("box_detection", screenshot_copy)
                                     if not movement or cv2.waitKey(1) & 0xFF == ord('q'):
                                         break
                                     else:
